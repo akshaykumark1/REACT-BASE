@@ -75,29 +75,157 @@ import  React from 'react'
 
 // implementing user defined function#######################################
 
+// class App extends React.Component {
+//   constructor() {
+//     super();
+//     this.state = { age: 20 };
+//   }
+
+//   changeAge = () => {
+//     // Use setState with the correct capitalization
+//     this.setState({ age: 25 });
+//   };
+
+//   render() {
+//     return (
+//       <>
+//         <h1>hello</h1>
+//         <h2>age {this.state.age}</h2>
+//         <button onClick={this.changeAge}>Change Age</button>
+//       </>
+//     );
+//   }
+// }
+
+
+// ######################mounting (getderivedstatefromprops)##################
+
+//  class App extends React.Component {
+//    constructor(props) {
+//      super(props);
+//      this.state = { age: 20 };
+//    }
+//    changeAge = () => {
+//      this.setState({ age: 25 })
+//    }
+//    static getDerivedStateFromProps(props, state) {
+//      return { age: props.age };
+//    }
+//    render() {
+//      return (
+//        <>
+//          <h2>age</h2>
+//          <h2>age {this.state.age}</h2>
+//          <button onClick={this.changeAge}>Change Age</button>
+//        </>
+//      )
+//    }
+//   }
+
+
+
+
+// ######################mounting (componentDidMount())##################
+
+// class App extends React.Component {
+//      constructor(props) {
+//        super(props);
+//        this.state = { age: 20 };
+//      }
+//      componentDidMount(){
+//        setTimeout(()=>{
+//          this.setState({age:25})
+//        },1000)
+//      }
+     
+//      render(){
+//        return (
+//          <>
+//            <h2>age</h2>
+//              <h2>age</h2>
+//               <h2>age {this.state.age}</h2>
+//               <button onClick={this.changeAge}>Change Age</button>
+//          </>
+//        )
+//      }
+//     }
+    
+
+// #####updating : shouldComponentUpdate(),getSnapshotBeforeUpdate()  #############################################
+  
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { age: 20 };
+//   }
+//   shouldComponentUpdate(){
+//     return true
+//   }
+//   changeAge = () => {
+//     this.setState({ age: 30 });
+//   }
+// componentDidMount(){
+//   setTimeout(()=>{
+//     this.setState({age:25})
+//   },1000)
+// }
+// getSnapshotBeforeUpdate(prevProps, prevState){
+//   console.log(prevProps,prevState)
+// }
+// componentDidUpdate(){
+//   console.log("component Updated")
+// }
+
+  
+//   render(){
+//     return (
+//       <>
+//         <h2>age</h2>
+//         <h2>age {this.state.age}</h2>
+//         <button onClick={this.changeAge}>Change Age</button>
+//       </>
+//     )
+//   }
+//  }
+ 
+
+// #####################unmounting(componentWillUnmount())###################
+
 class App extends React.Component {
   constructor() {
     super();
-    this.state = { age: 20 };
+    this.state = { show: true };
   }
-
-  changeAge = () => {
-    // Use setState with the correct capitalization
-    this.setState({ age: 25 });
-  };
-
+  deletehead=()=>{
+    this.setState({show:false})
+  }
   render() {
+    let myhead 
+    if(this.state.show){
+      myhead = <Sub/>
+    }
     return (
-      <>
+      <div>
+        {myhead}
         <h1>hello</h1>
-        <h2>age {this.state.age}</h2>
-        <button onClick={this.changeAge}>Change Age</button>
-      </>
+        <button onClick={this.deletehead}>delete</button>
+      </div>
     );
   }
+
 }
-
-
-
+class Sub extends React.Component {
+  componentWillUnmount(){
+    alert("component will unmount")
+  }
+  render(){
+    return(
+      <>
+      <h1>hello</h1>
+      </>
+    )
+  }
+}
 
 export default App
